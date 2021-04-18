@@ -62,40 +62,69 @@ class Contact {
 
     @Override
     public String toString() {
-        return '\n'+"Contact add is"+'\n'+ "First Name: " + firstName +'\n'+ "Last  Name: " + lastName +'\n'+ "City : " + city +'\n'+ "State : " + state
-                + "zip : " + zip +'\n'+"Phone Number : " + phoneNumber +'\n'+ "Email Id: " + email ;
+        return '\n'+"Contact is"+'\n'+ "First Name: " + firstName +'\n'+ "Last  Name: " + lastName +'\n'+ "City : " + city +'\n'+ "State : " + state
+                + "zip : " + zip +'\n'+"Phone Number : " + phoneNumber +'\n'+ "Email Id: " + email +'\n';
     }
 
-public void Add_Contact(int Person_Number) {
 
-  ArrayList<Contact> list=new ArrayList<Contact>();
-   Contact P1=new Contact();
-
-   Scanner s=new Scanner(System.in);
-   System.out.print("Enter First Name: ");
-    P1.setfirstName(s.nextLine());
-   System.out.print("Enter Last Name : ");
-    P1.setlastName(s.nextLine());
-   System.out.print("Enter City : ");
-    P1.setcity(s.nextLine());
-   System.out.print("Enter State : ");
-    P1.setstate(s.nextLine());
-   System.out.print("Enter zip : ");
-    P1.setzip(s.nextLine());
-   System.out.print("Enter PhoneNumber: ");
-    P1.setphoneNumber(s.nextLine());
-   System.out.print("Enter Email ID : ");
-    P1.setemail(s.nextLine());
-
-   list.add (P1);
-   System.out.println(list);
- }
+public void Add_Contact() {
+	   Scanner s=new Scanner(System.in);
+	   System.out.print("Add Contact  \n");
+	   System.out.print("Enter First Name: ");
+		this.firstName=s.nextLine();
+	   System.out.print("Enter Last Name : ");
+		this.lastName=s.nextLine();
+	   System.out.print("Enter City : ");
+		this.city=s.nextLine();
+	   System.out.print("Enter State : ");
+		this.state=s.nextLine();
+	   System.out.print("Enter zip : ");
+		this.zip=s.nextLine();
+	   System.out.print("Enter PhoneNumber: ");
+		this.phoneNumber=s.nextLine();
+	   System.out.print("Enter Email ID : ");
+		this.email=s.nextLine();
+	 }
+	
+	public void Display_All(ArrayList<Contact> arr){
+		boolean is_Empty=arr.isEmpty();
+		if(is_Empty==true)
+			System.out.println("Array List is Empty");
+		else
+			System.out.println(arr);
+	}
 }
 
 public class Address_Book {
  public static void main(String[] args) {
-    System.out.println("Give the information for First Contact");
-    Contact A1 =new Contact();
-    A1.Add_Contact(1);
+	Scanner s=new Scanner(System.in);
+	ArrayList<Contact> list=new ArrayList<Contact>();
+	int option;
+	do
+	{
+		Contact c=new Contact();
+		System.out.println("Enter your option : ");
+		System.out.println("1.Add contact  ");
+		System.out.println("2.Display all contact ");
+		
+		option=s.nextInt();
+
+		switch (option)
+		{
+		case 1:
+			c.Add_Contact();
+			list.add(c);
+			break;
+		case 2:
+			c.Display_All(list);
+			break;
+		default:
+			System.out.println("Enter valid option");
+			break;
+		}
+		System.out.println("Do you want to continue (1.Continue\0.Exit)");
+		option=s.nextInt();
+	}
+	while (option!=0);
  }
 }

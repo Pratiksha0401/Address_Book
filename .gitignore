@@ -1,2 +1,5 @@
 *.class
 *.java.bak
+*.classpath
+*.project
+

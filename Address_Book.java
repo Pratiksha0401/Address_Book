@@ -98,30 +98,32 @@ public class Address_Book {
 			System.out.println(list);
 	}
 
-	public void editContact(Contact c, String f_name ) {
+	public void editContact(Contact c, String f_name) {
 		for (int i = 0; i < list.size(); i++) {
-        c = (Contact)list.get(i);
+			c = (Contact)list.get(i);
 			if (f_name.equals(c.getfirstName())) {
-			System.out.print("Enter new First Name: ");
-			c.setfirstName(s.nextLine());
-			System.out.print("Enter  new Last Name : ");
-			c.setlastName(s.nextLine());
-			System.out.print("Enter new City : ");
-			c.setcity(s.nextLine());
-			System.out.print("Enter new State : ");
-			c.setstate(s.nextLine());
-			System.out.print("Enter new zip : ");
-			c.setzip(s.nextLine());
-			System.out.print("Enter new PhoneNumber: ");
-			c.setphoneNumber(s.nextLine());
-			System.out.print("Enter new Email ID : ");
-			c.setemail(s.nextLine());
-		 list.set(i,c);
-		 System.out.println(list);
-		 }
-		else
-		System.out.println("Not Found");
-		}
+				
+				System.out.println("Enter new First Name: ");
+				c.setfirstName(s.nextLine());
+				System.out.print("Enter  new Last Name : ");
+				c.setlastName(s.nextLine());
+				System.out.print("Enter new City : ");
+				c.setcity(s.nextLine());
+				System.out.print("Enter new State : ");
+				c.setstate(s.nextLine());
+				System.out.print("Enter new zip : ");
+				c.setzip(s.nextLine());
+				System.out.print("Enter new PhoneNumber: ");
+				c.setphoneNumber(s.nextLine());
+				System.out.print("Enter new Email ID : ");
+				c.setemail(s.nextLine());
+				
+			 list.set(i,c);
+			 System.out.println(list);
+			 }
+			else
+			System.out.println("Not Found");
+			}
 	 }
 
 	 public void deleteContact(Contact c,String f_name){

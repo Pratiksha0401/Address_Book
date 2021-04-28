@@ -131,7 +131,7 @@ public class Address_Book {
 	   Scanner s=new Scanner(System.in);
 	   System.out.print("Add Contact  \n");
 	   while(true){
-		      System.out.println("Enter First Name");
+		      System.out.println("Enter First Name :");
 		      c.setfirstName(s.nextLine());
 		      if((c.isValidFirstName())==true)
 		        break;
@@ -289,7 +289,7 @@ public class Address_Book {
 		System.out.println("1.Add contact  ");
 		System.out.println("2.Display all contact ");
 		System.out.println("3.Edit Contact ");
-		System.out.println("3.Delete Contact ");
+		System.out.println("4.Delete Contact ");
 		
 		option=s.nextInt();
 		c=new Contact();

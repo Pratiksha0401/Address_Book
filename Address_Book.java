@@ -1,14 +1,17 @@
 import java.util.*;
-import java.util.regex.*;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 class Contact {
-   private  String firstName;
-   private  String lastName;
-   private  String city;
-   private  String state;
-   private  String zip;
-   private  String phoneNumber;
-   private  String email;
+   private String firstName;
+   private String lastName;
+   private String city;
+   private String state;
+   private String zip;
+   private String phoneNumber;
+   private String email;
+   private List<Contact> contact;
 
     public void setfirstName(String firstName) {
         this.firstName = firstName;
@@ -65,261 +68,198 @@ class Contact {
                 + "zip : " + zip +'\n'+"Phone Number : " + phoneNumber +'\n'+ "Email Id: " + email +'\n';
     }
     
-    Pattern p;
-	Matcher m;
-	
-
-	public boolean isValidFirstName(){
-		String regex1="^[A-Z]{1}[a-z]+";
-		p = Pattern.compile(regex1);
-		 m= p.matcher(getfirstName());
-		return m.matches();
+    @Override
+	public boolean equals(Object obj) {
+    	boolean retVal = false;
+		if(!(obj instanceof Contact)){
+			return false;
+		}
+		Contact ptr= (Contact) obj;
+		retVal=ptr.firstName.toString()==this.firstName;
+		return retVal;
 	}
-	
-	public boolean isValidLastName() {
-        String regex="^[A-Z]{1}[A-Z a-z]{2,}$";
-        Pattern Q=Pattern.compile(regex);
-        Matcher n=Q.matcher(getlastName());
-        return n.matches();
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
+        return hash;
     }
-	
-	public boolean isValidCity() {
-        String regex="^[A-Z]{1}[A-Z a-z]{2,}$";
-        Pattern Q=Pattern.compile(regex);
-        Matcher n=Q.matcher(getcity());
-        return n.matches();
-    }
-	
-	public boolean isValidState() {
-        String regex="^[A-Z]{1}[A-Z a-z]{2,}$";
-        Pattern Q=Pattern.compile(regex);
-        Matcher n=Q.matcher(getstate());
-        return n.matches();
-    }
-	
-	public boolean isValidZIP() {
-        String regex="^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$";
-        Pattern Q=Pattern.compile(regex);
-        Matcher n=Q.matcher(getzip());
-        return n.matches();
-    }
-	
-	public boolean isValidPhoneNumber() {
-        String regex="^[1-9]{2}\\s{0,1}[1-9]{1}[0-9]{9}$";
-        Pattern Q=Pattern.compile(regex);
-        Matcher n=Q.matcher(getphoneNumber());
-        return n.matches();
-    }
-	
-	public boolean isValidEmailId() {
-        String regex="^[A-Z a-z 0-9]+([._+-][0-9 a-z A-Z]+)*@[0-9 a-z A-Z]+.[a-z A-Z]{2,3}([.][a-z A-Z]{2})*$";
-        Pattern Q=Pattern.compile(regex);
-        Matcher n=Q.matcher(getemail());
-        return n.matches();
-    }
+    
 }
 
-
-public class Address_Book {
-	static String f_name;
-	static ArrayList<Contact> list=new ArrayList<Contact>();
+class ContactOperations{
+	
 	static Scanner s=new Scanner(System.in);
 	
-	//Add Contact
-	public void Add_Contact(Contact c) {
+	public static void Add_Contact(List<Contact> contact) {
+				Contact c=new Contact();
+				System.out.print("Add Contact  \n");
+				System.out.print("Enter First Name: ");
+				c.setfirstName(s.next());
+				System.out.print("Enter Last Name : ");
+				c.setlastName(s.next());
+				System.out.print("Enter City : ");
+				c.setcity(s.next());
+				System.out.print("Enter State : ");
+				c.setstate(s.next());
+				System.out.print("Enter zip : ");
+				c.setzip(s.next());
+				System.out.print("Enter PhoneNumber: ");
+				c.setphoneNumber(s.next());
+				System.out.print("Enter Email ID : ");
+				c.setemail(s.next());
+				contact.add(c);
+		}
 		
-	   Scanner s=new Scanner(System.in);
-	   System.out.print("Add Contact  \n");
-	   while(true){
-		      System.out.println("Enter First Name :");
-		      c.setfirstName(s.nextLine());
-		      if((c.isValidFirstName())==true)
-		        break;
-		      else
-		        System.out.println("Invalid...1st letter must be Capital");
-			  }
-	   while(true) {
-		   	System.out.print("Enter Last Name : ");
-		   	c.setlastName(s.nextLine());
-		   	if((c.isValidLastName())==true)
-		        break;
-		      else
-		        System.out.println("Invalid...1st letter must be Capital");
-			  }
-	   while(true) {
-		   	System.out.print("Enter City : ");
-		   	c.setcity(s.nextLine());
-		   	if((c.isValidCity())==true)
-		        break;
-		      else
-		        System.out.println("Invalid...1st letter must be Capital");
-			  }
-	   while(true) {
-		   	System.out.print("Enter State : ");
-		   	c.setstate(s.nextLine());
-		   	if((c.isValidState())==true)
-		        break;
-		      else
-		        System.out.println("Invalid...1st letter must be Capital");
-			  }
-	   while(true) {
-		   	System.out.print("Enter zip : ");
-		   	c.setzip(s.nextLine());
-		   	if((c.isValidZIP())==true)
-		        break;
-		      else
-		        System.out.println("Invalid...must be 6 digits");
-			  }
-	   while(true) {
-		   	System.out.print("Enter PhoneNumber: ");
-		   	c.setphoneNumber(s.nextLine());
-		   	if((c.isValidPhoneNumber())==true)
-		        break;
-		      else
-		        System.out.println("Invalid...must be 2 digit country code followed by 10 digit number");
-			  }
-	   while(true) {
-		   	System.out.print("Enter Email ID : ");
-		   	c.setemail(s.nextLine());
-		   	if((c.isValidEmailId())==true)
-		        break;
-		      else
-		        System.out.println("Invalid...enter valid email Id");
-			  }
-		list.add(c);
-	 }
-	
-	//Display All Contact
-	 public void Display_All(){
-		boolean is_Empty=list.isEmpty();
-		if(is_Empty==true)
-			System.out.println("Array List is Empty");
-		else
-			System.out.println(list);
-	}
 
-	public void editContact( String f_name) {
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getfirstName().equalsIgnoreCase(f_name)) {
-				Contact contact=list.get(i);
-				
-				while(true){
-				      System.out.println("Enter New First Name");
-				      contact.setfirstName(s.next());
-				      if((contact.isValidFirstName())==true)
-				        break;
-				      else
-				        System.out.println("Invalid...1st letter must be Capital");
-					  }
-			   while(true) {
-				   	System.out.print("Enter New Last Name : ");
-				   	contact.setlastName(s.next());
-				   	if((contact.isValidLastName())==true)
-				        break;
-				      else
-				        System.out.println("Invalid...1st letter must be Capital");
-					  }
-			   while(true) {
-				   	System.out.print("Enter New City : ");
-				   	contact.setcity(s.next());
-				   	if((contact.isValidCity())==true)
-				        break;
-				      else
-				        System.out.println("Invalid...1st letter must be Capital");
-					  }
-			   while(true) {
-				   	System.out.print("Enter New State : ");
-				   	contact.setstate(s.next());
-				   	if((contact.isValidState())==true)
-				        break;
-				      else
-				        System.out.println("Invalid...1st letter must be Capital");
-					  }
-			   while(true) {
-				   	System.out.print("Enter New zip : ");
-				   	contact.setzip(s.next());
-				   	if((contact.isValidZIP())==true)
-				        break;
-				      else
-				        System.out.println("Invalid...must be 6 digits");
-					  }
-			   while(true) {
-				   	System.out.print("Enter New PhoneNumber: ");
-				   	contact.setphoneNumber(s.next());
-				   	if((contact.isValidPhoneNumber())==true)
-				        break;
-				      else
-				        System.out.println("Invalid...must be 2 digit country code followed by 10 digit number");
-					  }
-			   while(true) {
-				   	System.out.print("Enter New Email ID : ");
-				   	contact.setemail(s.next());
-				   	if((contact.isValidEmailId())==true)
-				        break;
-				      else
-				        System.out.println("Invalid...enter valid email Id");
-					  }
-				
-			 list.set(i,contact);
-			 System.out.println(list);
-			 }
+		 public static void Display_All(List<Contact> contact){
+			boolean is_Empty=contact.isEmpty();
+			if(is_Empty==true)
+				System.out.println("Array List is Empty");
 			else
-			System.out.println("Not Found");
-			}
-	 }
+				System.out.println(contact);
+		}
 
-	 public void deleteContact(Contact c,String f_name){
-		for(int i = 0; i < list.size(); i++){
-		c = (Contact)list.get(i);
-			if(f_name.equals(c.getfirstName())){
-				list.remove(i);
+		public static void editContact(List<Contact> contact ) {
+			System.out.println("Enter first name that you want to Edit:");
+			String firstName = s.next();
+			
+			for (int i = 0; i < contact.size(); i++) {
+				if (contact.get(i).getfirstName().equalsIgnoreCase(firstName)) {
+					Contact c = contact.get(i);
+					System.out.print("Enter new First Name: ");
+					c.setfirstName(s.next());
+					System.out.print("Enter  new Last Name : ");
+					c.setlastName(s.next());
+					System.out.print("Enter new City : ");
+					c.setcity(s.next());
+					System.out.print("Enter new State : ");
+					c.setstate(s.next());
+					System.out.print("Enter new zip : ");
+					c.setzip(s.next());
+					System.out.print("Enter new PhoneNumber: ");
+					c.setphoneNumber(s.next());
+					System.out.print("Enter new Email ID : ");
+					c.setemail(s.next());
+				contact.set(i,c);
+				System.out.println("Edited Successfully!");
+				}	
+				else if(firstName!=(contact.get(i).getfirstName())){
+					System.out.println("Not Found!");
 				}
 			}
-		}
+		 }
 
- public static void main(String[] args) {
-	
-	Address_Book book=new Address_Book();
-	Contact c;
-	
-	int option;
-	do
-	{
-		System.out.println("Enter your option : ");
-		System.out.println("1.Add contact  ");
-		System.out.println("2.Display all contact ");
-		System.out.println("3.Edit Contact ");
-		System.out.println("4.Delete Contact ");
-		
-		option=s.nextInt();
-		c=new Contact();
-		Scanner sc=new Scanner(System.in);
-
-		switch (option)
-		{
-		case 1:
-			book.Add_Contact(c);
-			break;
-		case 2:
-			book.Display_All();
-			break;
-		case 3:
-			System.out.println("Enter first name that you want to edit:");
-			f_name=sc.nextLine();
-			book.editContact(f_name);
-			break;
-		case 4:
-			System.out.println("Enter first name that you want to edit:");
-			f_name=sc.nextLine();
-			book.deleteContact(c,f_name);
-			break;
-		default:
-			System.out.println("Enter valid option");
-			break;
-		}
-		System.out.println("Do you want to continue (1.Continue or 0.Exit)");
-		option=s.nextInt();
-	}
-	while (option!=0);
- }
+		 public static void deleteContact(List<Contact> contact){
+			System.out.println("Enter first name that you want to Delete:");
+			String firstName = s.next();
+			 for (int i = 0; i < contact.size(); i++) {
+				  if (contact.get(i).getfirstName().equalsIgnoreCase(firstName)) {
+					 contact.remove(i);
+					 System.out.println("Deleted Successfully !");
+				  	 break;
+				 }  
+				  else if(firstName!=(contact.get(i).getfirstName())){
+						System.out.println("Not Found!");
+					}
+			  }  
+			}
 }
+
+class Address_Book_Operations {
+	
+	static String f_name;
+	static Scanner s=new Scanner(System.in);
+	
+	public static void addAddressBook(Hashtable<String, List<Contact>> addressBooks) {
+		 System.out.println("Add new AddressBook");
+		 String bookName = s.next();
+		 addressBooks.put(bookName, new ArrayList<Contact>());
+	}
+	
+	public static void displayAllAddressBook(Hashtable<String, List<Contact>> addressBooks) {
+		boolean is_Empty=addressBooks.isEmpty();
+		if(is_Empty==true)
+			System.out.println("No Address Books are Present");
+		else
+			System.out.println(addressBooks);
+	}
+	
+	public static void editAddressBook(Hashtable<String, List<Contact>> addressBooks) {
+	    System.out.println("Enter the name of the AddressBook you want to Edit");
+	    String bookName1 = s.next();
+	        
+	    if(addressBooks.containsKey(bookName1)) {
+		    List<Contact> contact = addressBooks.get(bookName1);
+		    int choice;
+		    do{
+		    	System.out.println("Enter your option : ");
+				System.out.println("1.Add contact  ");
+				System.out.println("2.Display all contact ");
+				System.out.println("3.Edit Contact ");
+				System.out.println("4.Delete Contact ");
+		
+				choice=s.nextInt();
+			    switch (choice)
+				{
+					case 1:
+						ContactOperations.Add_Contact(contact);
+						break;
+					case 2:			
+						ContactOperations.Display_All(contact);
+						break;	
+					case 3:			
+						ContactOperations.editContact(contact);
+						break;
+					case 4:
+						ContactOperations.deleteContact(contact);
+						break;
+					default:
+						System.out.println("Enter valid option");
+						break;	
+				 }
+			    System.out.println("Do you want to continue (1.Continue or 0.Exit)");
+				choice=s.nextInt();
+		       }while(choice != 0);
+		     }
+		           else 
+		        	   System.out.println("Invalid AddressBook Name!Not exist");
+		    }
+}
+
+public class Address_Book {
+
+	static Scanner s=new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		
+			int option;
+			Hashtable<String, List<Contact>> addressBooks = new Hashtable<String, List<Contact>>(); 
+			do {
+			System.out.println("Enter 1 to Add AddressBook\nEnter 2 to Edit AddressBook\nEnter 3 to see All Address Books\n"
+					+"Enter 0 to Exit");
+			option=s.nextInt();
+			switch(option) {
+			   case 1:
+			 		Address_Book_Operations.addAddressBook(addressBooks);
+			    	break;
+			   case 2:
+			    	Address_Book_Operations.editAddressBook(addressBooks); 
+			        break;
+			   case 3:
+			    	Address_Book_Operations.displayAllAddressBook(addressBooks); 
+			        break;
+			   default:
+				    System.exit(0);
+				    break;
+		    	}
+			}while(option != 0); 	    
+	}
+		     
+}
+		 
+
+	
+	
+	

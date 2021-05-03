@@ -5,6 +5,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import jdk.dynalink.linker.ConversionComparator.Comparison;
+
 class Contact {
    private String firstName;
    private String lastName;
@@ -95,23 +97,24 @@ class ContactOperations{
 	static Scanner s=new Scanner(System.in);
 	
 	public static void Add_Contact(List<Contact> contact) {
-				Contact c=new Contact();
-				System.out.print("Add Contact  \n");
-				System.out.print("Enter First Name: ");
-				c.setfirstName(s.next());
-				System.out.print("Enter Last Name : ");
-				c.setlastName(s.next());
-				System.out.print("Enter City : ");
-				c.setcity(s.next());
-				System.out.print("Enter State : ");
-				c.setstate(s.next());
-				System.out.print("Enter zip : ");
-				c.setzip(s.next());
-				System.out.print("Enter PhoneNumber: ");
-				c.setphoneNumber(s.next());
-				System.out.print("Enter Email ID : ");
-				c.setemail(s.next());
-				contact.add(c);
+			Contact c=new Contact();
+			System.out.print("Add Contact  \n");
+			System.out.print("Enter First Name: ");									
+			c.setfirstName(s.next());
+			System.out.print("Enter Last Name : ");
+			c.setlastName(s.next());
+			System.out.print("Enter City : ");
+			c.setcity(s.next());
+			System.out.print("Enter State : ");
+			c.setstate(s.next());
+			System.out.print("Enter zip : ");
+			c.setzip(s.next());
+			System.out.print("Enter PhoneNumber: ");
+			c.setphoneNumber(s.next());
+			System.out.print("Enter Email ID : ");
+			c.setemail(s.next());
+			contact.add(c);		
+				 
 		}
 		
 
@@ -167,6 +170,23 @@ class ContactOperations{
 					}
 			  }  
 			}
+
+
+		public static void sortedContactByFirstName(List<Contact> contact) {
+			
+			List<Contact> sortedContact=contact.stream().sorted(new compareFirstName()).collect(Collectors.toList());
+			System.out.println(sortedContact);
+		}
+}
+
+ class compareFirstName implements Comparator<Contact> {
+
+	@Override
+	public int compare(Contact o1, Contact o2) {
+		
+		return o1.getfirstName().compareTo(o2.getfirstName());
+	}
+
 }
 
 class Address_Book_Operations {
@@ -201,6 +221,7 @@ class Address_Book_Operations {
 				System.out.println("2.Display all contact ");
 				System.out.println("3.Edit Contact ");
 				System.out.println("4.Delete Contact ");
+				System.out.println("5.Sorted Contacts ");
 			
 				choice=s.nextInt();
 			    switch (choice)
@@ -217,6 +238,9 @@ class Address_Book_Operations {
 					case 4:
 						ContactOperations.deleteContact(contact);
 						break;	
+					case 5:
+						ContactOperations.sortedContactByFirstName(contact);
+						break;		
 					default:
 						System.out.println("Enter valid option");
 						break;	
@@ -228,8 +252,10 @@ class Address_Book_Operations {
 		           else 
 		        	   System.out.println("Invalid AddressBook Name!Not exist");
 		    }
-}
 
+
+
+}
 public class Address_Book {
 
 	static Scanner s=new Scanner(System.in);
@@ -251,7 +277,7 @@ public class Address_Book {
 			        break;
 			   case 3:
 			    	Address_Book_Operations.displayAllAddressBook(addressBooks); 
-			        break; 
+			        break;   
 			   default:
 				    System.exit(0);
 				    break;

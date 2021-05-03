@@ -69,7 +69,7 @@ class Contact {
     @Override
     public String toString() {
         return '\n'+"Contact is"+'\n'+ "First Name: " + firstName +'\n'+ "Last  Name: " + lastName +'\n'+ "City : " + city +'\n'+ "State : " + state
-                + "zip : " + zip +'\n'+"Phone Number : " + phoneNumber +'\n'+ "Email Id: " + email +'\n';
+                + "\nzip : " + zip +'\n'+"Phone Number : " + phoneNumber +'\n'+ "Email Id: " + email +'\n';
     }
     
     @Override
@@ -177,17 +177,59 @@ class ContactOperations{
 			List<Contact> sortedContact=contact.stream().sorted(new compareFirstName()).collect(Collectors.toList());
 			System.out.println(sortedContact);
 		}
+
+
+		public static void sortedContactByCity(List<Contact> contact) {
+			contact.stream().sorted(new compareCity()).forEach(System.out::println);
+			
+		}
+		
+		public static void sortedContactByState(List<Contact> contact) {
+			contact.stream().sorted(new compareState()).forEach(System.out::println);
+			
+		}
+		
+		public static void sortedContactByZip(List<Contact> contact) {
+			contact.stream().sorted(new compareZip()).forEach(System.out::println);
+			
+		}
 }
 
  class compareFirstName implements Comparator<Contact> {
 
 	@Override
-	public int compare(Contact o1, Contact o2) {
-		
+	public int compare(Contact o1, Contact o2) {	
 		return o1.getfirstName().compareTo(o2.getfirstName());
 	}
 
 }
+ 
+ class compareCity implements Comparator<Contact> {
+
+		@Override
+		public int compare(Contact o1, Contact o2) {	
+			return o1.getcity().compareTo(o2.getcity());
+		}
+
+	}
+ 
+ class compareState implements Comparator<Contact> {
+
+		@Override
+		public int compare(Contact o1, Contact o2) {	
+			return o1.getstate().compareTo(o2.getstate());
+		}
+
+	}
+ 
+ class compareZip implements Comparator<Contact> {
+
+		@Override
+		public int compare(Contact o1, Contact o2) {	
+			return o1.getzip().compareTo(o2.getzip());
+		}
+
+	}
 
 class Address_Book_Operations {
 	
@@ -221,8 +263,11 @@ class Address_Book_Operations {
 				System.out.println("2.Display all contact ");
 				System.out.println("3.Edit Contact ");
 				System.out.println("4.Delete Contact ");
-				System.out.println("5.Sorted Contacts ");
-			
+				System.out.println("5.Sorted Contacts by First Name ");
+				System.out.println("6.Sorted Contacts by City");
+				System.out.println("7.Sorted Contacts by State");	
+				System.out.println("8.Sorted Contacts by Zip");
+				
 				choice=s.nextInt();
 			    switch (choice)
 				{
@@ -240,7 +285,16 @@ class Address_Book_Operations {
 						break;	
 					case 5:
 						ContactOperations.sortedContactByFirstName(contact);
-						break;		
+						break;
+					case 6:
+						ContactOperations.sortedContactByCity(contact);
+						break;	
+					case 7:
+						ContactOperations.sortedContactByState(contact);
+						break;
+					case 8:
+						ContactOperations.sortedContactByZip(contact);
+						break;	
 					default:
 						System.out.println("Enter valid option");
 						break;	

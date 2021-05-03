@@ -1,7 +1,9 @@
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Contact {
    private String firstName;
@@ -172,13 +174,13 @@ class Address_Book_Operations {
 	static String f_name;
 	static Scanner s=new Scanner(System.in);
 	
-	public static void addAddressBook(Hashtable<String, List<Contact>> addressBooks) {
+	public static void addAddressBook(Map<String, List<Contact>> addressBooks) {
 		 System.out.println("Add new AddressBook");
 		 String bookName = s.next();
 		 addressBooks.put(bookName, new ArrayList<Contact>());
 	}
 	
-	public static void displayAllAddressBook(Hashtable<String, List<Contact>> addressBooks) {
+	public static void displayAllAddressBook(Map<String, List<Contact>> addressBooks) {
 		boolean is_Empty=addressBooks.isEmpty();
 		if(is_Empty==true)
 			System.out.println("No Address Books are Present");
@@ -186,7 +188,7 @@ class Address_Book_Operations {
 			System.out.println(addressBooks);
 	}
 	
-	public static void editAddressBook(Hashtable<String, List<Contact>> addressBooks) {
+	public static void editAddressBook(Map<String, List<Contact>> addressBooks) {
 	    System.out.println("Enter the name of the AddressBook you want to Edit");
 	    String bookName1 = s.next();
 	        
@@ -199,7 +201,7 @@ class Address_Book_Operations {
 				System.out.println("2.Display all contact ");
 				System.out.println("3.Edit Contact ");
 				System.out.println("4.Delete Contact ");
-		
+			
 				choice=s.nextInt();
 			    switch (choice)
 				{
@@ -214,7 +216,7 @@ class Address_Book_Operations {
 						break;
 					case 4:
 						ContactOperations.deleteContact(contact);
-						break;
+						break;	
 					default:
 						System.out.println("Enter valid option");
 						break;	
@@ -235,7 +237,7 @@ public class Address_Book {
 	public static void main(String[] args) {
 		
 			int option;
-			Hashtable<String, List<Contact>> addressBooks = new Hashtable<String, List<Contact>>(); 
+			Map<String, List<Contact>> addressBooks = new HashMap<String, List<Contact>>(); 
 			do {
 			System.out.println("Enter 1 to Add AddressBook\nEnter 2 to Edit AddressBook\nEnter 3 to see All Address Books\n"
 					+"Enter 0 to Exit");
@@ -249,7 +251,7 @@ public class Address_Book {
 			        break;
 			   case 3:
 			    	Address_Book_Operations.displayAllAddressBook(addressBooks); 
-			        break;
+			        break; 
 			   default:
 				    System.exit(0);
 				    break;

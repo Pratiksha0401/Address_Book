@@ -1,11 +1,14 @@
 package Address_Book;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-class Address_Book_Operations {
-		
+import java.util.stream.Collectors;
+
+public class Address_Book_Operations {
+	
 	static String f_name;
 	static Scanner s=new Scanner(System.in);
 		
@@ -48,34 +51,42 @@ class Address_Book_Operations {
 				switch (choice)
 				{
 					case 1:
-						ContactOperations.Add_Contact(contact);
+						System.out.print("Add Contact  \n");
+						System.out.print("Enter First Name :");
+	                    String fName=s.next();
+	                    
+						if (Contact_Operations.checkDuplicate(fName,contact)==false) {
+							Contact_Operations.Add_Contact(fName,contact);  
+	                    } else {
+	                        System.out.println("Already exists");
+	                    }
 						break;
 					case 2:			
-						ContactOperations.Display_All(contact);
+						Contact_Operations.Display_All(contact);
 						break;	
 					case 3:			
-						ContactOperations.editContact(contact);
+						Contact_Operations.editContact(contact);
 						break;
 					case 4:
-						ContactOperations.deleteContact(contact);
+						Contact_Operations.deleteContact(contact);
 						break;
 					case 5:
-						ContactOperations.countByCity(contact);
+						Contact_Operations.countByCity(contact);
 						break;
 					case 6:
-						ContactOperations.countByState(contact);
+						Contact_Operations.countByState(contact);
 						break;	
 					case 7:
-						ContactOperations.sortedContactByFirstName(contact);
+						Contact_Operations.sortedContactByFirstName(contact);
 						break;
 					case 8:
-						ContactOperations.sortedContactByCity(contact);
+						Contact_Operations.sortedContactByCity(contact);
 						break;	
 					case 9:
-						ContactOperations.sortedContactByState(contact);
+						Contact_Operations.sortedContactByState(contact);
 						break;
 					case 10:
-						ContactOperations.sortedContactByZip(contact);
+						Contact_Operations.sortedContactByZip(contact);
 						break;	
 					default:
 						System.out.println("Enter valid option");
@@ -89,6 +100,6 @@ class Address_Book_Operations {
 			        	   System.out.println("Invalid AddressBook Name!Not exist");
 			    }
 
+	
 
-
-	}
+}

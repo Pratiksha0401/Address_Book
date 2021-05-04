@@ -91,6 +91,12 @@ public class Contact_Operations {
 			  }  
 	}
 	
+	public static void viewPersonByCityOrState(List<Contact> contact) {
+		System.out.println("Enter CityName: ");
+    	String city = s.next();
+    	contact.stream().filter(c -> c.getcity().equals(city)).forEach(cn -> System.out.println("First Name : "+cn.getfirstName()+"  Last Name : "+cn.getlastName()));
+    }
+	
 	public static void searchByCityOrState(List<Contact> contact) {
     	System.out.println("Enter CityName: ");
     	String city = s.next();

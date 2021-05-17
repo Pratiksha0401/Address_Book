@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 public class AddressBook {
 	private static Scanner s = new Scanner(System.in);
-	private static File file = new File("D:\\Pratiksha\\Java_programs\\Day_28\\Annotation\\src\\main\\java\\addressBook\\Contact.csv");
+	private static File file = new File("Contact.csv");
 	static List<Contact> contact = new ArrayList<>();
 	 
 	 public static void main(String[] args) throws IOException {
@@ -48,8 +49,9 @@ public class AddressBook {
 	 
 	 private static void addToFile(Contact contact) {
 	        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-	            
 	        	writer.write(contact.toString());
+	        	CSVWriter csvWriter=new CSVWriter(writer);
+	        	csvWriter.writeAll(contact);
 	        } catch(IOException e) {
 	            System.out.println(e);
 	        }

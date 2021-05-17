@@ -9,11 +9,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
@@ -60,22 +62,15 @@ public class AddressBook
 	    }
 	 
 	 private static void readPeopleFromFile() throws IOException {
+		 Gson gson=new Gson();
 		 try {
-	 	        // Create an object of filereader class with CSV file as a parameter.
-	 	        FileReader filereader = new FileReader(file);
-	 	  
-	 	        // create csvReader object passing file reader as a parameter
-	 	        CSVReader csvReader = new CSVReader(filereader);
-	 	        String[] nextRecord;
-	 	  
-	 	        // we are going to read data line by line
-	 	        while ((nextRecord = csvReader.readNext()) != null) {
-	 	            for (String cell : nextRecord) {
-	 	                System.out.print(cell + "\t");
-	 	            }
-	 	            System.out.println();
-	 	        }
-	 	    }
+			 BufferedReader br=new BufferedReader(new FileReader(file));
+			 Contact[] usrObj=gson.fromJson(br,Contact[].class);
+
+			 List<Contact> csvUsers1 = Arrays.asList(usrObj);
+			 System.out.println(csvUsers1);
+				
+		 }	
 	 	    catch (Exception e) {
 	 	        e.printStackTrace();
 	 	    }    	 

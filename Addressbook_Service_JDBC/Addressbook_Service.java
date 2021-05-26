@@ -14,7 +14,7 @@ public class Addressbook_Service
 		System.out.println("2. Update Record ");		
 		System.out.println("3. Reterive Record For Particular Date Range ");
 		System.out.println("4. Get Contact By City Name ");
-
+		System.out.println("5. Insert Record ");
 		int option = sc.nextInt();
 		
 		switch(option) {
@@ -30,6 +30,8 @@ public class Addressbook_Service
 		case 4:
 			getContactByCity();
 			break;	
+		case 5:
+			InsertRecord();
 		}
 }
 

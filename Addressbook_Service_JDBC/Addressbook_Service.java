@@ -12,7 +12,8 @@ public class Addressbook_Service
     	System.out.println("Select option");
 		System.out.println("1. Retrieve All Records ");
 		System.out.println("2. Update Record ");		
-		
+		System.out.println("3. Reterive Record For Particular Date Range ");
+
 		int option = sc.nextInt();
 		
 		switch(option) {
@@ -21,7 +22,10 @@ public class Addressbook_Service
 			break;
 		case 2:
 			updateData();
-			break;			
+			break;	
+		case 3:
+			ReteriveDataForParticularDateRange();
+			break;		
 		}
 }
 

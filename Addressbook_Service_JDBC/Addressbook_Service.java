@@ -10,13 +10,18 @@ public class Addressbook_Service
     public static void main( String[] args ) throws ClassNotFoundException, SQLException
     {
     	System.out.println("Select option");
-		System.out.println("1. Retrieve All Records ");	
+		System.out.println("1. Retrieve All Records ");
+		System.out.println("2. Update Record ");		
+		
 		int option = sc.nextInt();
 		
 		switch(option) {
 		case 1:
 			printData();
-			break;					
+			break;
+		case 2:
+			updateData();
+			break;			
 		}
 }
 

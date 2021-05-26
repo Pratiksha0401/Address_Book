@@ -13,6 +13,7 @@ public class Addressbook_Service
 		System.out.println("1. Retrieve All Records ");
 		System.out.println("2. Update Record ");		
 		System.out.println("3. Reterive Record For Particular Date Range ");
+		System.out.println("4. Get Contact By City Name ");
 
 		int option = sc.nextInt();
 		
@@ -25,7 +26,10 @@ public class Addressbook_Service
 			break;	
 		case 3:
 			ReteriveDataForParticularDateRange();
-			break;		
+			break;	
+		case 4:
+			getContactByCity();
+			break;	
 		}
 }
 
